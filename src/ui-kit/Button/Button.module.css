@@ -1,0 +1,23 @@
+:global(.button) {
+  padding: 8px;
+  border: none;
+  font-weight: 700;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+.primary {
+  color: #eee;
+  background-color: #498;
+}
+
+.outlined {
+  border: 1px solid #777;
+  color: #777;
+  background-color: transparent;
+}
+
+.text {
+  color: #e22;
+  background-color: transparent;
+}

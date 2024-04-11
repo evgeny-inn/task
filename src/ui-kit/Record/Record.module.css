@@ -1,0 +1,17 @@
+.record {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.text {
+  margin: 0;
+  color: #777;
+}
