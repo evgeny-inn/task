@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Logo } from "../../ui-kit";
 import * as styles from './Header.module.css';
 
@@ -7,4 +8,4 @@ const Header = () => (
   </header>
 );
 
-export default Header;
+export default memo(Header);

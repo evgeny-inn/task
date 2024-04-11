@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import * as styles from './Main.module.css';
 
 interface MainProps {
@@ -12,4 +13,4 @@ const Main = ({ children }: MainProps) => (
   </main>
 );
 
-export default Main;
+export default memo(Main);
