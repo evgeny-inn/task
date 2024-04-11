@@ -9,10 +9,10 @@ const Input = ({ label, ...props }: InputProps) => {
   const id = useId();
 
   return (
-    <div>
+    <>
       <label className={styles.label} htmlFor={id}>{label}</label>
       <input className={styles.input} id={id} {...props} />
-    </div>
+    </>
   );
 };
 
