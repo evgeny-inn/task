@@ -1,6 +1,6 @@
 import { ContactsProvider } from './providers';
 import { Header, Main } from './components';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import './index.css';
 
 const App = () => (
