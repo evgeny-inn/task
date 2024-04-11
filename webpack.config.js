@@ -8,20 +8,15 @@ const __dirname = path.dirname(__filename);
 export default {
   name: 'dev',
   mode: 'development',
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   resolve: {
-    extensions: ['.jsx', '...'],
+    extensions: ['.tsx', '.ts', '.jsx', '...'],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        use: {
-          loader: 'babel-loader',
-        },
-        resolve: {
-          fullySpecified: false,
-        },
+        test: /\.tsx?$/i,
+        loader: 'ts-loader',
       },
       {
         test: /\.css$/,

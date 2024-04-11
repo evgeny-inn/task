@@ -1,7 +1,11 @@
 import { useId } from 'react';
 import * as styles from './Input.module.css';
 
-const Input = ({ label, ...props }) => {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+const Input = ({ label, ...props }: InputProps) => {
   const id = useId();
 
   return (
