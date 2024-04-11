@@ -1,5 +1,9 @@
-import { Input } from '../ui-kit';
+import { Header } from '../components';
 
-const App = () => <Input label="Name" name="name"  />;
+const App = () => (
+  <>
+    <Header />
+  </>
+);
 
 export default App;
