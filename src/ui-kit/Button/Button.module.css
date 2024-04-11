@@ -4,6 +4,7 @@
   font-weight: 700;
   border-radius: 8px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .primary {
