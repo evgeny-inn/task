@@ -1,15 +1,16 @@
-# 🚀 Welcome to your new awesome project!
+# Addressbuch
 
-This project has been created using **webpack-cli**, you can now run
+## Install
 
+```bash
+npm install
+npm run start
 ```
+
+## Build
+
+```bash
 npm run build
+# or
+docker-compose up -d
 ```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
