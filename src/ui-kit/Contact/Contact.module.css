@@ -9,9 +9,11 @@
 .title {
   margin: 0;
   margin-bottom: 8px;
+  cursor: default;
 }
 
 .text {
   margin: 0;
   color: #777;
+  cursor: default;
 }
