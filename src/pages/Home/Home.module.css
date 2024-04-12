@@ -1,14 +1,10 @@
 .contacts {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
   gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.contact {
-  flex: 1 1 30%;
 }
 
 .buttonDesktop {
@@ -21,7 +17,7 @@
 
 @media (max-width: 768px) {
   .contacts {
-    flex-flow: column nowrap;
+    grid-template-columns: 1fr;
     gap: 0;
   }
 
