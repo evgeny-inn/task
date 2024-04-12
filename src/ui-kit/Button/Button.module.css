@@ -22,3 +22,15 @@
   color: #e22;
   background-color: transparent;
 }
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #eee;
+  font-size: 42px;
+  border-radius: 50%;
+  background-color: #498;
+}

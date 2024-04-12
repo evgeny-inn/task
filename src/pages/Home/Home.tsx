@@ -26,12 +26,15 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.button}>
+      <div className={styles.buttonDesktop}>
         <Button variant="primary" onClick={openAddModal}>Neuer Eintrag</Button>
+      </div>
+      <div className={styles.buttonMobile}>
+        <Button variant="icon" onClick={openAddModal}>+</Button>
       </div>
       <ul className={styles.contacts}>
         {contacts.map(({ id, firstname, lastname, email }) => (
-          <li key={id} onClick={openUpdateModal(id)}>
+          <li className={styles.contact} key={id} onClick={openUpdateModal(id)}>
             <Contact title={`${firstname} ${lastname}`} text={email} />
           </li>
         ))}

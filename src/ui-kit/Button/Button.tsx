@@ -3,7 +3,7 @@ import * as styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant: 'primary' | 'outlined' | 'text';
+  variant: 'primary' | 'outlined' | 'text' | 'icon';
 }
 
 const Button = ({ children, variant, ...props }: ButtonProps) => {

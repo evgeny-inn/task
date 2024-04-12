@@ -7,6 +7,33 @@
   list-style: none;
 }
 
-.button {
+.contact {
+  flex: 1 1 30%;
+}
+
+.buttonDesktop {
   margin-bottom: 32px;
+}
+
+.buttonMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .contacts {
+    flex-flow: column nowrap;
+    gap: 0;
+  }
+
+  .buttonDesktop {
+    display: none;
+    margin-bottom: 0;
+  }
+
+  .buttonMobile {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: block;
+  }
 }

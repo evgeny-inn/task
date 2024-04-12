@@ -17,3 +17,10 @@
   color: #777;
   cursor: default;
 }
+
+@media (max-width: 768px) {
+  .contact {
+    width: 100%;
+    border-radius: 0;
+  }
+}
