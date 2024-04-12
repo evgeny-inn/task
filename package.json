@@ -5,9 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom",
-    "coverage": "jest --coverage",
-    "update-snapshot": "npx jest --updateSnapshot",
+    "test": "jest --env=jsdom --coverage",
+    "update-snapshot": "jest --updateSnapshot",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",

@@ -2,6 +2,7 @@
 
 exports[`renders add form correctly 1`] = `
 <form
+  onReset={[Function]}
   onSubmit={[Function]}
 >
   <div>
@@ -77,6 +78,7 @@ exports[`renders add form correctly 1`] = `
 
 exports[`renders update form correctly 1`] = `
 <form
+  onReset={[Function]}
   onSubmit={[Function]}
 >
   <div>
