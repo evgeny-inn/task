@@ -39,12 +39,12 @@ const ContactsProvider = ({ children }: ContactsProviderProps) => {
 
   const createContact = async (payload: Partial<Contact>) => {
     const { data } = await client.post('/contacts', { data: payload });
-    const updatedContacts = [...contacts, data];
+    const updatedContacts = [...contacts, data.responseObject];
     setContacts(updatedContacts);
   };
 
   const updateContact = async (contactId: number, payload: Partial<Contact>) => {
-    await client.put(`/contacts/${contactId}`);
+    await client.put(`/contacts/${contactId}`, { ...payload });
     const updatedContacts = contacts.map((contact) => contact.id === contactId
       ? { ...contact, ...payload }
       : contact
