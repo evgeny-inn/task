@@ -1,3 +1,4 @@
+import { useForm, Controller } from 'react-hook-form';
 import { useContacts } from '../../hooks';
 import { Input, Button } from '../../ui-kit';
 import * as styles from './Form.module.css';
@@ -14,19 +15,51 @@ const Form = ({ type, contactId, ...props }: FormProps) => {
 
   const contact = contacts.find((contact) => contact.id === contactId);
 
+  const { handleSubmit, control } = useForm({
+    values: {
+      firstname: contact?.firstname ?? '',
+      lastname: contact?.lastname ?? '',
+      email: contact?.email ?? '',
+    },
+  });
+
+  const handlers = {
+    add: handleSubmit(createContact),
+    update: handleSubmit((data) => updateContact(contactId as number, data)),
+    hidden: () => {},
+  };
+
   return (
-    <form {...props}>
+    <form {...props} onSubmit={handlers[type]}>
       <div className={styles.body}>
         <h2 className={styles.title}>Eintrag bearbeiten</h2>
         <div className={styles.grid}>
           <div>
-            <Input label="Vorname*" type="text" name="firstname" value={contact?.firstname} />
+            <Controller
+              name="firstname"
+              control={control}
+              render={({ field }) => (
+                <Input label="Vorname*" type="text" {...field} />
+              )}
+            />
           </div>
           <div>
-            <Input label="Nachname*" type="text" name="lastname" value={contact?.lastname} />
+            <Controller
+              name="lastname"
+              control={control}
+              render={({ field }) => (
+                <Input label="Nachname*" type="text" {...field} />
+              )}
+            />
           </div>
           <div className={styles.span}>
-            <Input label="E-Mail*" type="email" name="email" value={contact?.email} />
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input label="E-Mail*" type="email" {...field} />
+              )}
+            />
           </div>
         </div>
       </div>

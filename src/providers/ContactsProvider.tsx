@@ -10,7 +10,7 @@ interface Contact {
 
 interface ContactsContext {
   contacts: Contact[],
-  createContact: () => void,
+  createContact: (payload: Partial<Contact>) => void,
   updateContact: (contactId: number, payload: Partial<Contact>) => void,
   deleteContact: (contactId: number) => void,
 }
@@ -37,8 +37,8 @@ const ContactsProvider = ({ children }: ContactsProviderProps) => {
     fetchContacts();
   }, []);
 
-  const createContact = async () => {
-    const { data } = await client.post('/contacts');
+  const createContact = async (payload: Partial<Contact>) => {
+    const { data } = await client.post('/contacts', { data: payload });
     const updatedContacts = [...contacts, data];
     setContacts(updatedContacts);
   };
