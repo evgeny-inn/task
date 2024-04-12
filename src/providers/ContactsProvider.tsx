@@ -32,13 +32,13 @@ const ContactsProvider = ({ children }: ContactsProviderProps) => {
   useEffect(() => {
     const fetchContacts = async () => {
       const { data } = await client.get('/contacts');
-      setContacts(data);
+      setContacts(data.responseObject);
     };
     fetchContacts();
   }, []);
 
   const createContact = async (payload: Partial<Contact>) => {
-    const { data } = await client.post('/contacts', { data: payload });
+    const { data } = await client.post('/contacts', { ...payload });
     const updatedContacts = [...contacts, data.responseObject];
     setContacts(updatedContacts);
   };
