@@ -29,3 +29,10 @@
   gap: 8px;
   margin-left: auto;
 }
+
+.feedback {
+  margin: 8px 0;
+  padding: 0 8px;
+  color: #e22;
+  font-size: 12px;
+}

@@ -1,16 +1,26 @@
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useContacts } from '../../hooks';
 import { Input, Button } from '../../ui-kit';
 import * as styles from './Form.module.css';
+import type { SubmitHandler } from 'react-hook-form';
 
 type FormType = 'hidden' | 'add' | 'update';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   type: FormType;
   contactId: number | null;
+  closeModal: () => void;
 }
 
-const Form = ({ type, contactId, ...props }: FormProps) => {
+interface InputValues {
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
+const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
+  const [error, setError] = useState('');
   const { contacts, createContact, updateContact, deleteContact } = useContacts();
 
   const contact = contacts.find((contact) => contact.id === contactId);
@@ -23,14 +33,32 @@ const Form = ({ type, contactId, ...props }: FormProps) => {
     },
   });
 
+  const onAdd: SubmitHandler<InputValues> = async (data) => {
+    try {
+      await createContact(data);
+      closeModal();
+    } catch (err) {
+      setError((err as Error).message);
+    }
+  };
+
+  const onUpdate: SubmitHandler<InputValues> = async (data) => {
+    try {
+      await updateContact(contactId as number, data);
+      closeModal();
+    } catch (err) {
+      setError((err as Error).message);
+    }
+  };
+
   const handlers = {
-    add: handleSubmit(createContact),
-    update: handleSubmit((data) => updateContact(contactId as number, data)),
+    add: onAdd,
+    update: onUpdate,
     hidden: () => {},
   };
 
   return (
-    <form {...props} onSubmit={handlers[type]}>
+    <form onSubmit={handleSubmit(handlers[type])} onReset={closeModal} {...props}>
       <div className={styles.body}>
         <h2 className={styles.title}>Eintrag bearbeiten</h2>
         <div className={styles.grid}>
@@ -63,6 +91,7 @@ const Form = ({ type, contactId, ...props }: FormProps) => {
           </div>
         </div>
       </div>
+      {error && <p className={styles.feedback}>Something went wrong. Try again.</p>}
       <div className={styles.footer}>
         {type === 'update' && (
           <Button variant="text" type="button" onClick={() => deleteContact(contactId as number)}>

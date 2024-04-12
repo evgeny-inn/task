@@ -37,7 +37,7 @@ const Home = () => {
         ))}
       </ul>
       <Modal isOpen={formType !== 'hidden'} onClose={closeModal}>
-        <Form type={formType} contactId={contactToUpdate} onReset={closeModal} />
+        <Form type={formType} contactId={contactToUpdate} closeModal={closeModal} />
       </Modal>
     </>
   );
