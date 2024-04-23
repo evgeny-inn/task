@@ -73,7 +73,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
               name="firstname"
               control={control}
               render={({ field }) => (
-                <Input label="Vorname*" type="text" {...field} />
+                <Input label="Vorname*" type="text" placeholder="Vorname*" {...field} />
               )}
             />
           </div>
@@ -82,7 +82,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
               name="lastname"
               control={control}
               render={({ field }) => (
-                <Input label="Nachname*" type="text" {...field} />
+                <Input label="Nachname*" type="text" placeholder="Nachname*" {...field} />
               )}
             />
           </div>
@@ -91,7 +91,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
               name="email"
               control={control}
               render={({ field }) => (
-                <Input label="E-Mail*" type="email" {...field} />
+                <Input label="E-Mail*" type="email" placeholder="E-Mail*" {...field} />
               )}
             />
           </div>
