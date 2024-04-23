@@ -11,119 +11,114 @@ Polly.register(NodeHttpAdapter);
 
 let polly: Polly;
 
-describe('app', () => {
-  beforeAll(() => {
-    polly = new Polly('rest api', {
-      adapters: ['node-http'],
+beforeAll(() => {
+  polly = new Polly('rest api', {
+    adapters: ['node-http'],
+  });
+
+  const { server } = polly;
+
+  server
+    .get(`/contacts`)
+    .intercept((_, res) => {
+      const data = {
+        responseObject: [
+          {
+            id: 1,
+            firstname: 'Matthias',
+            lastname: 'Käpernick',
+            email: 'dev-jobs@autohaus-koenig.de',
+          },
+        ],
+      };
+      res.status(200).json(data);
     });
 
-    const { server } = polly;
-
-    server
-      .get(`/contacts`)
-      .intercept((_, res) => {
-        const data = {
-          responseObject: [
-            {
-              id: 1,
-              firstname: 'Matthias',
-              lastname: 'Käpernick',
-              email: 'dev-jobs@autohaus-koenig.de',
-            },
-          ],
-        };
-        res.status(200).json(data);
+  server
+    .post(`/contacts`)
+    .intercept((_, res) => {
+      const newContact = {
+        firstname: 'Billy',
+        lastname: 'Bauer',
+        email: 'billy.bauer@gmail.com',
+      };
+      res.status(201).json({
+        responseObject: { id: 2, ...newContact },
       });
+    });
 
-    server
-      .post(`/contacts`)
-      .intercept((_, res) => {
-        const newContact = {
-          firstname: 'Billy',
-          lastname: 'Bauer',
-          email: 'billy.bauer@gmail.com',
-        };
-        res.status(201).json({
-          responseObject: { id: 2, ...newContact },
-        });
-      });
-
-    server
-      .put(`/contacts/2`)
-      .intercept((_, res) => {
-        const updatedContact = {
-          firstname: 'Billy',
-          lastname: 'Johnson',
-          email: 'billy.bauer@gmail.com',
-        };
-        res.status(200).json({
-          responseObject: { id: 2, ...updatedContact }
-        })
-      });
-
-    server
-      .delete(`/contacts/2`)
-      .intercept((_, res) => {
-        res.status(200);
+  server
+    .put(`/contacts/2`)
+    .intercept((_, res) => {
+      const updatedContact = {
+        firstname: 'Billy',
+        lastname: 'Johnson',
+        email: 'billy.bauer@gmail.com',
+      };
+      res.status(200).json({
+        responseObject: { id: 2, ...updatedContact }
       })
-  });
-
-  beforeAll(async () => {
-    await render(<App />);
-  });
-
-  afterAll(async () => {
-    await polly.stop();
-  });
-
-  it('peforms CRUD operations', async () => {
-    await waitFor(() => {
-      const contact = screen.getByText('Matthias Käpernick');
-      expect(contact).toBeInTheDocument();
     });
 
-    const addButton = screen.getByText('Neuer Eintrag');
-    await userEvent.click(addButton);
+  server
+    .delete(`/contacts/2`)
+    .intercept((_, res) => {
+      res.status(200);
+    })
+});
 
-    const name = screen.getByLabelText(/vorname/i);
-    await userEvent.type(name, 'Billy');
+afterAll(async () => {
+  await polly.stop();
+});
 
-    const surname = screen.getByLabelText(/nachname/i);
-    await userEvent.type(surname, 'Bauer');
+it('peforms CRUD operations', async () => {
+  await render(<App />);
 
-    const email = screen.getByLabelText(/e-mail/i);
-    await userEvent.type(email,'billy.bauer@gmail.com');
+  const initialContact = await screen.findByText('Matthias Käpernick');
+  expect(initialContact).toBeInTheDocument();
 
-    const submitButton = screen.getByText('Speichern');
-    await userEvent.click(submitButton);
+  const addButton = screen.getByText('Neuer Eintrag');
+  await userEvent.click(addButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Billy Bauer')).toBeInTheDocument();
-    });
+  const name = screen.getByLabelText(/vorname/i);
+  await userEvent.type(name, 'Billy');
 
-    const contact = screen.getByText('Billy Bauer');
-    await userEvent.click(contact);
+  const surname = screen.getByLabelText(/nachname/i);
+  await userEvent.type(surname, 'Bauer');
 
-    const surnameToUpdate = screen.getByLabelText(/nachname/i);
-    await userEvent.clear(surnameToUpdate);
-    await userEvent.type(surnameToUpdate, 'Johnson');
+  const email = screen.getByLabelText(/e-mail/i);
+  await userEvent.type(email,'billy.bauer@gmail.com');
 
-    const saveButton = screen.getByText('Speichern');
-    await userEvent.click(saveButton);
+  const submitButton = screen.getByText('Speichern');
+  await userEvent.click(submitButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Billy Johnson')).toBeInTheDocument();
-      expect(screen.queryByText('Billy Bauer')).not.toBeInTheDocument();
-    });
+  expect(await screen.findByText('Billy Bauer')).toBeInTheDocument();
+  const contacts = screen.getAllByRole('listitem');
+  expect(contacts).toHaveLength(2);
 
-    const updatedContact = screen.getByText('Billy Johnson');
-    await userEvent.click(updatedContact);
+  const contact = screen.getByText('Billy Bauer');
+  await userEvent.click(contact);
 
-    const deleteButton = screen.getByText('Löschen');
-    await userEvent.click(deleteButton);
+  const surnameToUpdate = screen.getByLabelText(/nachname/i);
+  await userEvent.clear(surnameToUpdate);
+  await userEvent.type(surnameToUpdate, 'Johnson');
 
-    await waitFor(() => {
-      expect(screen.queryByText('Billy Johnson')).not.toBeInTheDocument();
-    });
+  const saveButton = screen.getByText('Speichern');
+  await userEvent.click(saveButton);
+
+
+  expect(await screen.findByText('Billy Johnson')).toBeInTheDocument();
+  expect(screen.queryByText('Billy Bauer')).not.toBeInTheDocument();
+
+  const updatedContact = screen.getByText('Billy Johnson');
+  await userEvent.click(updatedContact);
+
+  const deleteButton = screen.getByText('Löschen');
+  await userEvent.click(deleteButton);
+
+  await waitFor(() => {
+    expect(screen.queryByText('Billy Johnson')).not.toBeInTheDocument();
+    const contacts = screen.getAllByRole('listitem');
+    expect(contacts).toHaveLength(1);
   });
 });
