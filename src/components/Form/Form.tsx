@@ -57,10 +57,16 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
     hidden: () => {},
   };
 
+  const formTitles = {
+    add: 'Neuer Eintrag',
+    update: 'Eintrag bearbeiten',
+    hidden: '',
+  };
+
   return (
     <form onSubmit={handleSubmit(handlers[type])} onReset={closeModal} {...props}>
       <div className={styles.body}>
-        <h2 className={styles.title}>Eintrag bearbeiten</h2>
+        <h2 className={styles.title}>{formTitles[type]}</h2>
         <div className={styles.grid}>
           <div>
             <Controller
