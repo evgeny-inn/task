@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`renders correctly 1`] = `
-<header>
-  <h1>
-    Adressbuch
-  </h1>
-</header>
-`;
