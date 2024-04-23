@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+:global(.button:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .primary {
   color: var(--color-light);
   background-color: var(--color-accent);

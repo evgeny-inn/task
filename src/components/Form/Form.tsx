@@ -25,7 +25,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
 
   const contact = contacts.find((contact) => contact.id === contactId);
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, formState: { isValid } } = useForm({
     values: {
       firstname: contact?.firstname ?? '',
       lastname: contact?.lastname ?? '',
@@ -72,6 +72,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
             <Controller
               name="firstname"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Input label="Vorname*" type="text" placeholder="Vorname*" {...field} />
               )}
@@ -81,6 +82,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
             <Controller
               name="lastname"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Input label="Nachname*" type="text" placeholder="Nachname*" {...field} />
               )}
@@ -90,6 +92,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
             <Controller
               name="email"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Input label="E-Mail*" type="email" placeholder="E-Mail*" {...field} />
               )}
@@ -106,7 +109,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
         )}
         <div className={styles.footerInner}>
           <Button variant="outlined" type="reset">Abbrechen</Button>
-          <Button variant="primary" type="submit">Speichern</Button>
+          <Button variant="primary" type="submit" disabled={!isValid}>Speichern</Button>
         </div>
       </div>
     </form>
