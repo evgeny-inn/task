@@ -34,7 +34,7 @@ const Home = () => {
       </div>
       <ul className={styles.contacts}>
         {contacts.map(({ id, firstname, lastname, email }) => (
-          <li key={id} onClick={openUpdateModal(id)}>
+          <li key={id} className={styles.contact} onClick={openUpdateModal(id)}>
             <Contact title={`${firstname} ${lastname}`} text={email} />
           </li>
         ))}

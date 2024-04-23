@@ -1,17 +1,20 @@
 .contact {
   display: inline-block;
+  width: 100%;
   padding: 8px 16px 12px;
   border: 1px solid var(--color-semi-dark);
   border-radius: 2px;
   background-color: var(--color-light);
   vertical-align: middle;
-  overflow: hidden;
 }
 
 .title {
   margin: 0;
   margin-bottom: 8px;
   font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   cursor: default;
 }
 
