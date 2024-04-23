@@ -1,13 +1,14 @@
 .label {
   display: block;
   padding: 0 8px;
-  font-size: 12px;
+  font-size: 10px;
+  line-height: 13px;
 }
 
 .input {
   box-sizing: border-box;
   width: 100%;
-  padding: 4px;
-  border: 1px solid #777;
+  padding: 10px 8px;
+  border: 1px solid var(--color-semi-dark);
   border-radius: 4px;
 }
