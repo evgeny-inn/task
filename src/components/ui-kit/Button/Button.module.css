@@ -41,7 +41,7 @@
   color: var(--color-semi-light);
   font-weight: 400;
   font-size: 48px;
-  line-height: 1;
+  line-height: 64px;
   border-radius: 50%;
   background-color: var(--color-accent);
 }
