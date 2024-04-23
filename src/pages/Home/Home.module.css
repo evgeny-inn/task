@@ -1,14 +1,14 @@
 .contacts {
   display: grid;
   grid-template-columns: repeat(auto-fit, 250px);
-  gap: 24px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .buttonDesktop {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .buttonMobile {
@@ -28,8 +28,8 @@
 
   .buttonMobile {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
+    bottom: 32px;
+    right: 32px;
     display: block;
   }
 }
