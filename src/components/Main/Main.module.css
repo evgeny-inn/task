@@ -1,7 +1,7 @@
 .main {
   height: 100%;
-  padding: 32px 0;
-  background-color: #eee;
+  padding: 48px 0;
+  background-color: var(--color-semi-light);
 }
 
 .container {
