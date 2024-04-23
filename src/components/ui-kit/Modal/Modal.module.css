@@ -19,3 +19,10 @@
   background-color: white;
   width: 536px;
 }
+
+@media (max-width: 768px) {
+  .content {
+    max-width: 335px;
+    margin: 0 15px;
+  }
+}
