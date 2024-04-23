@@ -51,6 +51,15 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      await deleteContact(contactId as number);
+      closeModal();
+    } catch (err) {
+      setError((err as Error).message);
+    }
+  };
+
   const handlers = {
     add: onAdd,
     update: onUpdate,
@@ -103,7 +112,7 @@ const Form = ({ type, contactId, closeModal, ...props }: FormProps) => {
       {error && <p className={styles.feedback}>Something went wrong. Try again.</p>}
       <div className={styles.footer}>
         {type === 'update' && (
-          <Button variant="text" type="button" onClick={() => deleteContact(contactId as number)}>
+          <Button variant="text" type="button" onClick={onDelete}>
             Löschen
           </Button>
         )}
