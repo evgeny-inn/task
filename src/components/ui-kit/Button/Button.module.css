@@ -21,6 +21,8 @@
 }
 
 .text {
+  padding-left: 0;
+  padding-right: 0;
   color: var(--color-danger);
   background-color: transparent;
 }
