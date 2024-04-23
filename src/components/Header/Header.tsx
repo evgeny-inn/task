@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Logo } from "../../ui-kit";
+import { Logo } from "../ui-kit";
 import * as styles from './Header.module.css';
 
 const Header = () => (

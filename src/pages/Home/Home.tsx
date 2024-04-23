@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useContacts } from '../../hooks';
 import { Form } from '../../components';
-import { Button, Contact, Modal } from '../../ui-kit';
+import { Button, Contact, Modal } from '../../components/ui-kit';
 import * as styles from './Home.module.css';
 import type { FormType } from '../../components';
 

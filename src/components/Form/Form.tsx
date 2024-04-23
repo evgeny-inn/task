@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useContacts } from '../../hooks';
-import { Input, Button } from '../../ui-kit';
+import { Input, Button } from '../ui-kit';
 import * as styles from './Form.module.css';
 import type { SubmitHandler } from 'react-hook-form';
 
